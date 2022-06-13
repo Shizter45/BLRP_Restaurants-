@@ -89,3 +89,19 @@ Citizen.CreateThread(function() -- Also Taken from (https://github.com/Abel-Gami
         end
     end
 end)
+
+
+function OpenMenu(items)
+    ESX.UI.Menu.CloseAll()
+
+    ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'general_menu', {
+        title = 'Buy Items',
+        align = 'center',
+        elements = items
+    }, function(data, menu)
+        TriggerServerEvent('BLRP_RESTAURANTS:BuyItem', data.current.item, data.current.price, data.current.name)
+    end,
+    function(data, menu)
+        menu.close()
+    end)
+end
